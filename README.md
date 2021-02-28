@@ -239,6 +239,8 @@ A leaf node contains `isleaf` (set as `true`) and the output decision class (`cl
 
 **Example**
 
+![Tree](https://raw.githubusercontent.com/animator/json-ml-model-spec/main/images/tree.png)
+
 The json model for the above decision tree (graphviz image) is as follows:
 
 ```json
