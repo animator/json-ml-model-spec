@@ -88,3 +88,77 @@ When a ML model outputs discrete indexes representing some meaningful output (in
 },
 ```
 
+### 3. `transformer`
+
+Transformers provide certain rules for transforming the input data before it enters the model. It can also include the parameters for transforming output field which is used to inverse transform the model output to fetch the real output of the model after scoring. The specification currently supports `Standard` and `MinMax` transformers which are two most popular ways of transforming the input data.
+
+The transformer object is specified using a map with keys 
+
+-  `"type"` - `"Standard"` or `"MinMax"` 
+- `"scale_fields"` - a map of fields names (keys) and the corresponding map of scaling parameters (value) for the field. 
+
+The scaling parameters a field include:
+- `"mean"` and `"stddev"` if transformer type is `"Standard"`. For a field in the data with value `x` the transformed input is `x_new = (x - mean)/stddev`
+- `"scale"` and `"min"` if transformer type is `"MinMax"`. For a field in the data with value `x` the transformed input is `x_new = x*scale + min`
+
+#### 3.1 `Standard` Transformer Example 
+
+```json
+"transformer": {
+    "type": "Standard",
+    "scale_fields": {
+        "X1": {
+            "mean": 17.71256038647343,
+            "stddev": 11.378717175302857
+        },
+        "X2": {
+            "mean": 1083.8856889130436,
+            "stddev": 1260.5843868803893
+        },
+        "X3": {
+            "mean": 4.094202898550725,
+            "stddev": 2.94200221305731
+        },
+        "X4": {
+            "mean": 24.969030072463767,
+            "stddev": 0.012395199368547943
+        },
+        "X5": {
+            "mean": 121.53336108695655,
+            "stddev": 0.015328636553097923
+        },
+        "Y": {
+            "mean": 37.980193236714975,
+            "stddev": 13.590044806293161
+        }
+    }
+},
+```
+
+#### 3.2 `MinMax` Transformer Example 
+
+```json
+"transformer": {
+    "type": "MinMax",
+    "scale_fields": {
+        "sepal length (cm)": {
+            "scale": 0.27777777777777773,
+            "min": -1.1944444444444442
+        },
+        "sepal width (cm)": {
+            "scale": 0.41666666666666663,
+            "min": -0.8333333333333333
+        },
+        "petal length (cm)": {
+            "scale": 0.1694915254237288,
+            "min": -0.1694915254237288
+        },
+        "petal width (cm)": {
+            "scale": 0.4166666666666667,
+            "min": -0.04166666666666667
+        }
+    }
+},
+```
+
+### 4. `model`
