@@ -1,4 +1,4 @@
-# Machine Learning Model specification in JSON 
+# JSON Machine Learning (JML) Model specification
 ## For deployment in Inference/Scoring Engines
 
 JSON is a simple data interchange format which has gained tremendous popularity. The aim of this specification is to present a way in which people can export their Machine Learning models into JSON and then import this JSON model and run inference/scoring on new data in any platform of choice. 
